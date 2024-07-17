@@ -90,7 +90,6 @@ $isNotChrome = strpos(request()->header('User-Agent'), 'Chrome') === false;
 
     document.getElementById('next').addEventListener('click', function() {
         const flashcardElement = document.getElementById('flashcard');
-        
         flashcardElement.classList.add('fade-out');
 
         setTimeout(() => {
