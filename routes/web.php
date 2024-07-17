@@ -17,20 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Route::middleware('auth')->group(function () {
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/flashcards', [FlashcardController::class, 'index'])->name('flashcards');
+    Route::get('/', [FlashcardController::class, 'index'])->name('flashcards');
     
     // Quizzes Routes
     Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
@@ -39,6 +39,6 @@ Route::middleware('auth')->group(function () {
     // Progress Routes
     Route::get('/progress', [ProgressController::class, 'index'])->name('progress');
 
-});
+// });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
