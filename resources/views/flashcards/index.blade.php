@@ -1,5 +1,5 @@
 @php
-    $isNotChrome = strpos(request()->header('User-Agent'), 'Chrome') === false;
+$isNotChrome = strpos(request()->header('User-Agent'), 'Chrome') === false;
 @endphp
 
 <x-app-layout>
@@ -27,9 +27,9 @@
                     <div id="flashcard" class="flashcard h-52 border p-6 rounded-lg shadow-lg mb-4 transition-transform">
                         <p id="word" class="font-bold" style="font-size: 72px;"></p>
                         <p id="pinyin" class="text-xl text-gray-500"></p>
-                        <p id="meaning" class="text-xl hidden "></p>
+                        <p id="meaning" class="text-xl hidden"></p>
                     </div>
-                    <button id="flip" class="mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-900 rounded  transition">Flip</button>
+                    <button id="flip" class="mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-900 rounded transition">Flip</button>
                     <button id="speak" 
                             class="mt-4 px-4 py-2 bg-transparent dark:text-gray-200 rounded hover:bg-transparent transition" 
                             @if($isNotChrome) 
@@ -48,9 +48,8 @@
 <script>
     const flashcards = @json($flashcards);
     let currentIndex = 0;
-    let isFlipped = false; // Track flip state
+    let isFlipped = false;
 
-    // Shuffle function to randomize the flashcards array
     function shuffle(array) {
         let currentIndex = array.length, randomIndex;
 
@@ -63,12 +62,11 @@
         return array;
     }
 
-    // Randomize flashcards array
     shuffle(flashcards);
 
     function showFlashcard(index) {
         if (index >= flashcards.length) {
-            index = 0; // loop back to the beginning
+            index = 0;
         }
         const flashcard = flashcards[index];
 
@@ -107,8 +105,15 @@
     });
 
     document.getElementById('flip').addEventListener('click', function() {
-        isFlipped = !isFlipped; // Toggle flip state
-        updateFlipDisplay(); // Update display
+        const flashcardElement = document.getElementById('flashcard');
+        flashcardElement.classList.add('flip');
+
+        isFlipped = !isFlipped;
+
+        setTimeout(() => {
+            updateFlipDisplay();
+            flashcardElement.classList.remove('flip');
+        }, 300); // Duration of the flip animation
     });
 
     let voices = [];
@@ -117,7 +122,6 @@
         voices = speechSynthesis.getVoices();
     };
 
-    // Text-to-Speech functionality
     document.getElementById('speak').addEventListener('click', function() {
         const word = document.getElementById('word').textContent;
         const utterance = new SpeechSynthesisUtterance(word);
@@ -125,12 +129,10 @@
         if (mandarinVoice) {
             utterance.voice = mandarinVoice;
         }
-        utterance.rate = 0.7; // Slower rate
+        utterance.rate = 0.7;
         speechSynthesis.speak(utterance);
-      
     });
 
-    // Show the first flashcard initially
     showFlashcard(currentIndex);
 </script>
 
@@ -152,5 +154,22 @@
 
     .transition-transform {
         transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .flip {
+        animation: flip 0.3s forwards;
+    }
+
+    @keyframes flip {
+        0% {
+        transform: perspective(600px) rotateY(0);
+        }
+        100% {
+            transform: perspective(600px) rotateY(180deg);
+        }
+    }
+
+    .hidden {
+        display: none;
     }
 </style>
