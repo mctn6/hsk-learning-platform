@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <div class="container">
     @foreach($quizzes as $quiz)
         <div class="quiz">
@@ -16,4 +14,4 @@
         </div>
     @endforeach
 </div>
-@endsection
+</x-app-layout>

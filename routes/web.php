@@ -30,14 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/flashcards', [FlashcardController::class, 'index'])->name('flashcards.index');
+    Route::get('/flashcards', [FlashcardController::class, 'index'])->name('flashcards');
     
     // Quizzes Routes
-    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
     Route::post('/quizzes/{quiz}/answer', [QuizController::class, 'answer'])->name('quizzes.answer');
 
     // Progress Routes
-    Route::get('/progress', [ProgressController::class, 'index'])->name('progress.index');
+    Route::get('/progress', [ProgressController::class, 'index'])->name('progress');
 
 });
 

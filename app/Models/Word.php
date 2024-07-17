@@ -2,10 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Word extends Model
+use Illuminate\Support\Facades\File;
+class Word 
 {
-    use HasFactory;
+
+    protected $filePath;
+
+    public function __construct()
+    {
+        $this->filePath = resource_path('data/words.json');
+    }
+    public function all()
+    {
+        if (!File::exists($this->filePath)) {
+            return [];
+        }
+        return json_decode(File::get($this->filePath), true);
+    }
 }
