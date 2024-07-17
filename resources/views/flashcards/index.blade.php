@@ -89,6 +89,10 @@ $isNotChrome = strpos(request()->header('User-Agent'), 'Chrome') === false;
     }
 
     document.getElementById('next').addEventListener('click', function() {
+        if(isFlipped){
+            isFlipped = false;
+            updateFlipDisplay();
+        }
         const flashcardElement = document.getElementById('flashcard');
         flashcardElement.classList.add('fade-out');
 
@@ -156,7 +160,7 @@ $isNotChrome = strpos(request()->header('User-Agent'), 'Chrome') === false;
     }
 
     .flip {
-        animation: flip 0.3s forwards;
+        animation: flip 0.2s forwards;
     }
 
     @keyframes flip {
