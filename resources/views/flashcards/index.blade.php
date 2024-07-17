@@ -24,11 +24,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center">
-                    <div id="flashcard" class="flashcard border p-6 rounded-lg shadow-lg mb-4 transition-transform">
+                    <div id="flashcard" class="flashcard h-52 border p-6 rounded-lg shadow-lg mb-4 transition-transform">
                         <p id="word" class="font-bold" style="font-size: 72px;"></p>
-                        <p id="pinyin" class="text-xl"></p>
-                        <p id="meaning" class="text-lg text-gray-500"></p>
+                        <p id="pinyin" class="text-xl text-gray-500"></p>
+                        <p id="meaning" class="text-xl hidden "></p>
                     </div>
+                    <button id="flip" class="mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-900 rounded  transition">Flip</button>
                     <button id="speak" 
                             class="mt-4 px-4 py-2 bg-transparent dark:text-gray-200 rounded hover:bg-transparent transition" 
                             @if($isNotChrome) 
@@ -47,6 +48,7 @@
 <script>
     const flashcards = @json($flashcards);
     let currentIndex = 0;
+    let isFlipped = false; // Track flip state
 
     // Shuffle function to randomize the flashcards array
     function shuffle(array) {
@@ -76,6 +78,18 @@
         currentIndex = index;
     }
 
+    function updateFlipDisplay() {
+        if (isFlipped) {
+            document.getElementById('word').classList.add('hidden');
+            document.getElementById('pinyin').classList.add('hidden');
+            document.getElementById('meaning').classList.remove('hidden');
+        } else {
+            document.getElementById('word').classList.remove('hidden');
+            document.getElementById('pinyin').classList.remove('hidden');
+            document.getElementById('meaning').classList.add('hidden');
+        }
+    }
+
     document.getElementById('next').addEventListener('click', function() {
         const flashcardElement = document.getElementById('flashcard');
         
@@ -90,6 +104,11 @@
                 flashcardElement.classList.remove('fade-in');
             }, 300);
         }, 300);
+    });
+
+    document.getElementById('flip').addEventListener('click', function() {
+        isFlipped = !isFlipped; // Toggle flip state
+        updateFlipDisplay(); // Update display
     });
 
     let voices = [];
