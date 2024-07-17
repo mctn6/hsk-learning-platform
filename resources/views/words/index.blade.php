@@ -60,11 +60,8 @@
 
                 const wordBank = document.querySelectorAll('word-bank');
 
-                wordBank.classList.add('scale-95');
-                    // setTimeout(() => {
-                    //     wordBank.classList.remove('scale-95');
-                    // }, 100);
-                });
+        
+            });
         });
     });
 </script>
