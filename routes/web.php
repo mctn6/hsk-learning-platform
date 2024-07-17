@@ -19,13 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [FlashcardController::class, 'index'])->name('flashcards');
+Route::get('/flashcards', [FlashcardController::class, 'index'])->name('flashcards');
     
-// Quizzes Routes
-Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
-Route::post('/quizzes/{quiz}/answer', [QuizController::class, 'answer'])->name('quizzes.answer');
-
-// Progress Routes
-Route::get('/progress', [ProgressController::class, 'index'])->name('progress');
-
-Route::get('/words', [WordController::class, 'index'])->name('words');
+Route::get('/', [WordController::class, 'index'])->name('words');
