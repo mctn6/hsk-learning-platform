@@ -13,7 +13,7 @@
         "APP_NAME": "HSK Learning",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://hsk-learning-platform-bytl-cl01yr9a1-mctn6s-projects.vercel.app/",
+        "APP_URL": "https://hsk-learning-platform-bytl.vercel.app/",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
