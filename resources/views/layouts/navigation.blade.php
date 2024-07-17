@@ -7,9 +7,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
+                    <x-nav-link :href="route('words')" :active="request()->routeIs('words')">
+                        {{ __('Words') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('flashcards')" :active="request()->routeIs('flashcards')">
                         {{ __('Flashcards') }}
                     </x-nav-link>
+
                 </div>
             </div>
             <!-- Hamburger -->
@@ -27,9 +32,13 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('words')" :active="request()->routeIs('words')">
+                {{ __('Words') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('flashcards')" :active="request()->routeIs('flashcards')">
                 {{ __('Flashcards') }}
             </x-responsive-nav-link>
+
         </div>
     </div>
 </nav>

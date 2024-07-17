@@ -106,6 +106,7 @@
         if (mandarinVoice) {
             utterance.voice = mandarinVoice;
         }
+        utterance.rate = 0.7; // Slower rate
         speechSynthesis.speak(utterance);
       
     });

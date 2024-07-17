@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flashcard;
-use Illuminate\Http\Request;
-
 
 class FlashcardController extends Controller
 {
@@ -20,6 +18,4 @@ class FlashcardController extends Controller
         $flashcards = $this->flashcardModel->all();
         return view('flashcards.index', compact('flashcards'));
     }
-
-
 }
